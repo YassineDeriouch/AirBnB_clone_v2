@@ -58,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
             if _cmd not in HBNBCommand.dot_cmds:
                 raise Exception
 
-            # if parantheses contain arguments, parse them
+            # if parentheses contain arguments, parse them
             pline = pline[pline.find('(') + 1:pline.find(')')]
             if pline:
                 # partition args: (<id>, [<delim>], [<*args>])
@@ -114,15 +114,40 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """ Create an object of any class"""
+        """ Create an object of any class with parameters"""
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+
+        args = args.split()
+        class_name = args[0]
+
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
+
+        args = args[1:]
+        parameters = {}
+        for arg in args:
+            if '=' in arg:
+                key, value = arg.split('=')
+                key = key.replace('_', ' ')
+                if value.startswith('"') and value.endswith('"'):
+                    value = value[1:-1].replace('\\"', '"')
+                elif '.' in value:
+                    try:
+                        value = float(value)
+                    except ValueError:
+                        pass
+                else:
+                    try:
+                        value = int(value)
+                    except ValueError:
+                        pass
+                parameters[key] = value
+
+        new_instance = HBNBCommand.classes[class_name](**parameters)
+        new_instance.save()
         print(new_instance.id)
         storage.save()
 
