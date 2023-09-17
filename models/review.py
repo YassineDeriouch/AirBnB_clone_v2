@@ -7,7 +7,6 @@ class Review(BaseModel, Base):
     """
     This class defines a Review.
 
-    Attributes:
         __tablename__ (str): The table name for the database table.
         text (str): The text of the review (maximum 1024 characters).
         place_id (str): The ID of the associated Place.
