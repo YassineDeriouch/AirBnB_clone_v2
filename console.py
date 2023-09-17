@@ -119,9 +119,9 @@ class HBNBCommand(cmd.Cmd):
             return
 
         args = args.split()
-        class_name = args[0]
+        className = args[0]
 
-        if class_name not in HBNBCommand.classes:
+        if className not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
@@ -145,7 +145,7 @@ class HBNBCommand(cmd.Cmd):
                         pass
                 parameters[key] = value
 
-        new_instance = HBNBCommand.classes[class_name](**parameters)
+        new_instance = HBNBCommand.classes[className](**parameters)
         new_instance.save()
         print(new_instance.id)
         storage.save()
