@@ -17,6 +17,7 @@ class BaseModel:
     '''
         Base class for other classes to be used for the duration.
     '''
+
     '''
 	tips: 
 	id : base model ID (primary key)
