@@ -19,7 +19,6 @@ class Place(BaseModel, Base):
         latitude         : The latitude coordinate of the Place.
         longitude        : The longitude coordinate of the Place.
     """
-
     __tablename__ = 'places'
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
