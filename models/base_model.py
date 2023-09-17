@@ -12,8 +12,7 @@ Base = declarative_base()
 
 
 class BaseModel:
-    """Defines the BaseModel class.
-
+    """Defines the BaseModel class."""
     """
         tips: 
         id : base model ID (primary key)

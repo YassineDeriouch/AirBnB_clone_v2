@@ -10,6 +10,7 @@ class State(Base, BaseModel):
         name            :  defines the name of the State.
         cities          :  desines the State-City relationship.
     """
+
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
     cities = relationship("City",  backref="state", cascade="delete")
