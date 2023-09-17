@@ -9,17 +9,17 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """Returns a list of objects of one type of class existing currently in storage"""
-        if cls is None:
-            return FileStorage.__objects
-        else:
-           class_obj_list = {}
-            for key, obj in FileStorage.__objects.items():
-                className = obj.__class__.__name__
-                if className == cls:
-                    class_obj_list[key] = obj
-            return class_obj_list
-
+        """Return a list of objects of a class existing in the storage """
+        if cls is not None:
+            if type(cls) == str:
+                cls = eval(cls)
+            objects_by_class  = {}
+            for key, obj in self.__objects.items():
+                if type(obj) == cls:
+                    objects_by_class[key] = obj
+            return objects_by_class
+        return self.__objects
+ 
     def new(self, obj):
         """Adds new object to storage dictionary"""
         self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
