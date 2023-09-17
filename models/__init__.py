@@ -1,6 +1,7 @@
 import os
 
 """import needed modules """
+
 from os import getenv
 
 """ store the value of  HBNB_TYPE_STORAGE environment variable in """
