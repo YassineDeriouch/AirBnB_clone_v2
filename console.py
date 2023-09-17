@@ -112,43 +112,40 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    def do_create(self, args):
-        """ Create an object of any class with parameters"""
-        if not args:
-            print("** class name missing **")
-            return
+    def do_create(self, line):
+        """Usage: create <class> <key 1>=<value 2> <key 2>=<value 2> ...
+        Create a new class instance with given keys/values and print its id.
+        """
+        try:
+            if not line:
+                raise SyntaxError()
+           name = line.split(" ")
 
-        args = args.split()
-        class_name = args[0]
-
-        if class_name not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
-
-        args = args[1:]
-        parameters = {}
-        for arg in args:
-            if '=' in arg:
-                key, value = arg.split('=')
-                key = key.replace('_', ' ')
-                if value.startswith('"') and value.endswith('"'):
-                    value = value[1:-1].replace('\\"', '"')
-                elif '.' in value:
-                    try:
-                        value = float(value)
-                    except ValueError:
-                        pass
+            kwargs = {}
+            for i in range(1, len(name)):
+                key, value = tuple(name[i].split("="))
+                if value[0] == '"':
+                    value = value.strip('"').replace("_", " ")
                 else:
                     try:
-                        value = int(value)
-                    except ValueError:
-                        pass
-                parameters[key] = value
+                        value = eval(value)
+                    except (SyntaxError, NameError):
+                        continue
+                kwargs[key] = value
 
-        new_instance = HBNBCommand.classes[class_name](**parameters)
-        new_instance.save()
-        print(new_instance.id)
-        storage.save()
+            if kwargs == {}:
+                obj = eval(name[0])()
+            else:
+                obj = eval(name[0])(**kwargs)
+                storage.new(obj)
+            print(obj.id)
+            obj.save()
+
+        except SyntaxError:
+            print("** class name missing **")
+        except NameError:
+            print("** class doesn't exist **")
+
 
     def help_create(self):
         """ Help information for the create method """
