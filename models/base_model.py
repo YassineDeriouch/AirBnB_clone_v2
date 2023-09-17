@@ -17,6 +17,12 @@ class BaseModel:
     '''
         Base class for other classes to be used for the duration.
     '''
+    '''
+	tips: 
+	id : base model ID (primary key)
+        created_at : creation datetime.
+        updated_at : recent update datetime.
+    '''
     id = Column(String(60), primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
