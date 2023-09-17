@@ -6,14 +6,12 @@ from sqlalchemy import Column, String
 
 class User(BaseModel, Base):
      """
-        This class defines a user by various attributes
+        This class defines a user 
 
         email      : user's email
         password   : user's password
         first_name : user's first name
         last_name  : user's last name
-        places     : User-Place relationship
-        reviews    : User-Review relationship
 
     """
     __tablename__ = "users"
