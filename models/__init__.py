@@ -4,7 +4,7 @@ import os
 from os import getenv
 
 """ store the value of  HBNB_TYPE_STORAGE environment variable in """
-storage_type = os.getenv("HBNB_TYPE_STORAGE")
+storageType = os.getenv("HBNB_TYPE_STORAGE")
 
 """ import the needed storage class based on HBNB_TYPE_STORAGE environment variable """
 if storageType == "db":
