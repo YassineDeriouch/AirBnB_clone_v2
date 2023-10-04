@@ -8,7 +8,7 @@ deploy: do_packs && do_deploys
 from fabric.api import local, env, put, run
 from time import strftime
 import os.path
-env.hosts = ['35.237.202.79', '34.204.185.51']
+env.hosts = ['100.25.15.84', '54.210.108.220']
 
 
 def do_pack():
